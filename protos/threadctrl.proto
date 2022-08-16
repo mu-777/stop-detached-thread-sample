@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package threadctrl;
+
+service ThreadControl {
+  rpc RunThread (RunThreadReq) returns (RunThreadResp) {}
+  rpc StopAllThread (StopAllThreadReq) returns (StopAllThreadResp) {}
+}
+
+message RunThreadReq {
+  string key = 1;
+}
+
+message RunThreadResp {
+  bool isSuccess = 1;
+}
+
+message StopAllThreadReq {
+}
+
+message StopAllThreadResp {
+  bool isSuccess = 1;
+}

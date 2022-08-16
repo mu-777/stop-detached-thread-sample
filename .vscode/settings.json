@@ -1,0 +1,7 @@
+{
+  "astyle.astylerc": "${workspaceRoot}/.vscode/astylerc",
+  "C_Cpp.formatting": "Disabled",
+  "python.analysis.extraPaths": [
+    "/home/ryosuke/.local/lib/python3.6/site-packages/"
+], 
+}

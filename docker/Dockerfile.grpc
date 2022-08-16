@@ -1,0 +1,37 @@
+
+FROM ubuntu:18.04
+
+# https://grpc.io/docs/languages/cpp/quickstart/
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update
+RUN apt-get install -y \
+      ssh \
+      build-essential \
+      autoconf \
+      libtool \
+      pkg-config \
+      libssl-dev \
+      git \
+    && apt-get clean
+
+RUN wget -q -O cmake-linux.sh https://github.com/Kitware/CMake/releases/download/v3.19.6/cmake-3.19.6-Linux-x86_64.sh \
+    && sh cmake-linux.sh -- --skip-license \
+    && rm cmake-linux.sh
+
+RUN git clone https://github.com/grpc/grpc -b v1.41.0 --recursive \
+    && cd grpc \
+    && mkdir build \
+    && cd build \
+    && cmake .. \
+        -DgRPC_INSTALL=ON -DgRPC_BUILD_CODEGEN=ON -DgRPC_BUILD_TESTS=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE \
+        -DgRPC_BUILD_GRPC_PYTHON_PLUGIN=ON \
+    && make -j8 \
+    && make install
+
+
+RUN apt-get install -y \
+      python3-pip \
+    && apt-get clean
+
+RUN python3 -m pip install grpcio-tools

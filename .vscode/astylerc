@@ -1,0 +1,17 @@
+style=java 
+indent=spaces=2
+indent-switches
+indent-preproc-block
+indent-preprocessor
+indent-col1-comments
+attach-classes
+max-instatement-indent=100
+pad-oper
+pad-header
+unpad-paren
+align-pointer=type
+align-reference=type
+add-brackets
+convert-tabs
+close-templates
+break-after-logical

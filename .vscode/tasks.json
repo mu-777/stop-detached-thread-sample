@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "configure",
+      "command": "mkdir -p build; cd build; cmake ..",
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceRoot}"
+      },
+      "detail": "[Mytask] CMake template configure task"
+    },
+    {
+      "type": "shell",
+      "label": "build",
+      "command": "cd build; make -j8",
+      "problemMatcher": [],
+      "detail": "[Mytask] CMake template build task"
+    },
+    {
+      "label": "Build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "configure",
+        "build"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}
