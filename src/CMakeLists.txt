@@ -9,7 +9,8 @@ pb_grpc_generate_cpp(PROTO_SRCS PROTO_HDRS GRPC_SRCS GRPC_HDRS
 add_library(grpc_proto STATIC ${PROTO_SRCS} ${PROTO_HDRS} ${GRPC_SRCS} ${GRPC_HDRS})
 target_link_libraries(grpc_proto gRPC::grpc++ gRPC::grpc++_reflection protobuf::libprotobuf)
 
-set(SERVER_TARGET server)
-add_executable(${SERVER_TARGET} "${SERVER_TARGET}.cpp")
-target_link_libraries(${SERVER_TARGET} grpc_proto)
-install(TARGETS ${SERVER_TARGET} RUNTIME DESTINATION bin)
+foreach (SERVER_TARGET server_detach server_join)
+    add_executable(${SERVER_TARGET} "${SERVER_TARGET}.cpp")
+    target_link_libraries(${SERVER_TARGET} grpc_proto)
+    install(TARGETS ${SERVER_TARGET} RUNTIME DESTINATION bin)
+endforeach ()

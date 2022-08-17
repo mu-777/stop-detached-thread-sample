@@ -11,14 +11,14 @@
 #include "threadctrl.grpc.pb.h"
 
 namespace threadctrl {
-class ThreadControlImpl final : public ThreadControl::Service {
+class ThreadControlImpl_detach final : public ThreadControl::Service {
   std::atomic_bool _isRunning;
   std::atomic_uint _workingThreads;
   std::mutex _threadsMutex;
   std::condition_variable _threadsCond;
 
 public:
-  ThreadControlImpl() : ThreadControl::Service(), _isRunning(true), _workingThreads(0) {
+  ThreadControlImpl_detach() : ThreadControl::Service(), _isRunning(true), _workingThreads(0) {
     std::cout << "Constructor" << std::endl;
   }
 
@@ -57,7 +57,7 @@ public:
 
 void RunServer() {
   std::string server_address("localhost:50051");
-  threadctrl::ThreadControlImpl threadctrl;
+  threadctrl::ThreadControlImpl_detach threadctrl;
 
   grpc::EnableDefaultHealthCheckService(true);
   grpc::reflection::InitProtoReflectionServerBuilderPlugin();
